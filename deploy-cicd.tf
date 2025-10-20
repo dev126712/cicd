@@ -14,7 +14,7 @@ provider "aws" {
 resource "aws_instance" "cicd-server" {
   ami                         = "ami-0bb7d855677353076"
   associate_public_ip_address = true
-  instance_type               = "t2.micro"
+  instance_type               = "t2.large"
   key_name                    = "testk"
   vpc_security_group_ids      = [aws_security_group.web_access.id]
   user_data                   = file("setup.sh")
@@ -32,6 +32,14 @@ resource "aws_security_group" "web_access" {
     description = "Allow SSH from anywhere"
     from_port   = 22
     to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "Allow"
+    from_port   = 8000
+    to_port     = 9000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
