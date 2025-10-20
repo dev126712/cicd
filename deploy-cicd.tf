@@ -11,35 +11,19 @@ provider "aws" {
   region = "us-east-2"
 }
 
-data "aws_ami" "amazon_linux" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
-
-resource "aws_instance" "my_app_server" {
-  ami                         = data.aws_ami.amazon_linux.id
-  instance_type               = "t2.micro"
+resource "aws_instance" "cicd-server" {
+  ami                         = "ami-0bb7d855677353076"
   associate_public_ip_address = true
+  instance_type               = "t2.micro"
+  key_name                    = "testk"
   vpc_security_group_ids      = [aws_security_group.web_access.id]
-
-  user_data = file("setup.sh")
-
-  key_name = "testk"
+  user_data                   = file("setup.sh")
   tags = {
     Name    = "cicd"
     Project = "CloudProject"
   }
 }
+
 
 resource "aws_security_group" "web_access" {
   vpc_id = "" # Replace with your VPC ID if not using default

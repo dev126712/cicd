@@ -12,7 +12,6 @@ mkdir -p /ec2-user/app
 cd /ec2-user/app
 git clone https://github.com/dev126712/cicd.git
 cd cicd
-rm .env
 rm .gitignore
 rm deploy-cicd.tf
 rm setup.sh
