@@ -27,10 +27,10 @@ data "aws_ami" "amazon_linux" {
 }
 
 resource "aws_instance" "my_app_server" {
-  ami           = data.aws_ami.amazon_linux.id
-  instance_type = "t2.micro"
-
-  vpc_security_group_ids = [aws_security_group.web_access.id]
+  ami                         = data.aws_ami.amazon_linux.id
+  instance_type               = "t2.micro"
+  associate_public_ip_address = true
+  vpc_security_group_ids      = [aws_security_group.web_access.id]
 
   user_data = file("setup.sh")
 

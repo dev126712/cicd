@@ -1,16 +1,19 @@
 #!/bin/bash
 
-sudo yum update -y
-sudo yum install -y docker git
-sudo service docker start
-sudo usermod -a -G docker ec2-user
-
-mkdir -p /home/ec2-user/app
-cd /home/ec2-user/app
+sudo apt update
+sudo apt upgrade -y
+sudo apt install git -y
+git clone https://github.com/dev126712/Installation.git
+cd Installation
+chmod +x 'DockerTerrKub.sh'
+./'DockerTerrKub.sh'
+cd ../home
+mkdir -p /ec2-user/app
+cd /ec2-user/app
 git clone https://github.com/dev126712/cicd.git
 cd cicd
 rm .env
 rm .gitignore
 rm deploy-cicd.tf
+rm setup.sh
 sudo docker compose up -d --build
-
