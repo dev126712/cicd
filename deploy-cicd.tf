@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "ca-central-1"
+  region = "us-east-2"
 }
 
 data "aws_ami" "amazon_linux" {
@@ -32,9 +32,10 @@ resource "aws_instance" "my_app_server" {
 
   vpc_security_group_ids = [aws_security_group.web_access.id]
 
-  key_name = "my-ssh-key-pair"
+  key_name = "testk"
   tags = {
-    Name    = "MyCACentralInstance"
+    Name    = "cicdy
+"
     Project = "CloudProject"
   }
 }
