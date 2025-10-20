@@ -32,10 +32,11 @@ resource "aws_instance" "my_app_server" {
 
   vpc_security_group_ids = [aws_security_group.web_access.id]
 
+  user_data = file("setup.sh")
+
   key_name = "testk"
   tags = {
-    Name    = "cicdy
-"
+    Name    = "cicd"
     Project = "CloudProject"
   }
 }
