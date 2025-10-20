@@ -1,0 +1,57 @@
+services:
+  sonar-qube:
+    image: ${SONAR_QUBE_IMAGE}
+    container_name: ${SONAR_QUBE_CONTAINER_NAME}
+    ports:
+      - ${SONAR_QUBE_PORT}:${SONAR_QUBE_PORT}
+    networks:
+      - pipeline_net
+    env_file: .env
+#    volumes:
+      # Mount the named volume to the container's data path
+      #- sonar_data_v:/opt/sonarqube/data 
+      #- sonar_data_v_logs:/opt/sonarqube/logs # Recommended: Separate volume for logs
+    # SonarQube requires this for production usage.
+    # Adjust to your needs; this is a common setting for small instances.
+    environment:
+      - SONAR_ES_JAVA_OPTS=-Xmx512m -Xms512m
+
+
+  jenkins:
+    image: ${JENKINS_IMAGE}
+    container_name: ${JENKINS_CONTAINER_NAME}
+    ports:
+      - ${JENKINS_PORT}:${JENKINS_PORT}
+    networks:
+      - pipeline_net
+    env_file: .env
+    volumes:
+    # <Volume Name from top-level>:<Path inside container>
+    - /var/run/docker.sock:/var/run/docker.sock
+      # Optional: Mount Docker binary if your Jenkins image doesn't have it
+      # - /usr/bin/docker:/usr/bin/docker
+
+  nexus:
+    image: ${NEXUS_IMAGE}
+    container_name: ${NEXUS_CONTAINER_NAME}
+    ports:
+      - ${NEXUS_PORT}:${NEXUS_PORT}
+    networks:
+      - pipeline_net
+    env_file: .env
+    volumes:
+      # Mount the named volume to the container's data directory
+      - nexus_data_v:/nexus-data
+
+volumes:
+  jenkins_data_v:
+    name: ${JENKINS_VOLUME_NAME}
+  nexus_data_v:
+    name: ${NEXUS_VOLUME_NAME}
+  sonar_data_v:
+    name: ${SONAR_VOLUNE_NAME}
+
+networks:
+  pipeline_net:
+    name: ${PIPELINE_NETWORK}
+    driver: bridge
