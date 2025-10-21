@@ -5,7 +5,7 @@ services:
     ports:
       - ${SONAR_QUBE_PORT}:${SONAR_QUBE_PORT}
     networks:
-      - pipeline_net
+      - sonarqube
     env_file: .env
     depends_on:
       - db
@@ -27,12 +27,16 @@ services:
     ports:
       - ${JENKINS_PORT}:${JENKINS_PORT}
     networks:
-      - pipeline_net
+      - nexus
+      - sonarqube
+      - db
     env_file: .env
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs 
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-      # Optional: Mount Docker binary if your Jenkins image doesn't have it
-      # - /usr/bin/docker:/usr/bin/docker
+    - jenkins-docker-certs:/certs/client 
+    - jenkins-data:/var/jenkins_home
 
   nexus:
     image: ${NEXUS_IMAGE}
@@ -40,7 +44,7 @@ services:
     ports:
       - ${NEXUS_PORT}:${NEXUS_PORT}
     networks:
-      - pipeline_net
+      - nexus
     env_file: .env
     volumes:
       - nexus_data_v:/nexus-data
@@ -55,11 +59,13 @@ services:
     volumes:
       - postgres_sata:/var/lib/postgresql/data
     networks:
-      - pipeline_net
+      - db
 
 
 volumes:
   jenkins_data_v:
+  jenkins-docker-certs:
+  jenkins-data:
   nexus_data_v:
   sonar_data_v:
   sonar_data_v_logs:
@@ -69,6 +75,9 @@ volumes:
   
 
 networks:
-  pipeline_net:
-    name: ${PIPELINE_NETWORK}
+  db:
+    driver: bridge
+  nexus:
+    driver: bridge
+  sonarqube:
     driver: bridge
