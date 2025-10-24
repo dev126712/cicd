@@ -57,10 +57,9 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DATABASE_NAME}
     volumes:
-      - PGDATA:/var/lib/postgresql/18/docker
+      - postgres_sata:/var/lib/postgresql/data
     networks:
       - db
-      - sonarqube
 
 
 volumes:
@@ -73,7 +72,7 @@ volumes:
   postgres_data:
   sonar_data_plugins:
   sonar_data_ext:
-  PGDATA:
+  
 
 networks:
   db:

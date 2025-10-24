@@ -14,7 +14,11 @@ provider "aws" {
 resource "aws_instance" "cicd-server" {
   ami                         = "ami-0bb7d855677353076"
   associate_public_ip_address = true
+<<<<<<< HEAD
   instance_type               = "t2.micro"
+=======
+  instance_type               = "t2.large"
+>>>>>>> parent of 2190c3b (.)
   key_name                    = "testk"
   vpc_security_group_ids      = [aws_security_group.web_access.id]
   user_data                   = file("setup.sh")
@@ -37,6 +41,17 @@ resource "aws_security_group" "web_access" {
   }
 
   ingress {
+<<<<<<< HEAD
+=======
+    description = "Allow"
+    from_port   = 8000
+    to_port     = 9000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+>>>>>>> parent of 2190c3b (.)
     description = "Allow HTTP access"
     from_port   = 80
     to_port     = 80
@@ -55,3 +70,11 @@ resource "aws_security_group" "web_access" {
     Name = "WebAccessSG"
   }
 }
+<<<<<<< HEAD
+=======
+
+output "ec2_public_ip" {
+  value       = aws_instance.cicd-server.public_ip
+  description = "The public IP address of the main application server."
+}
+>>>>>>> parent of 2190c3b (.)
