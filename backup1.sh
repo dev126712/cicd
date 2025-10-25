@@ -9,14 +9,14 @@
 # - AWS CLI must be installed and configured (aws configure).
 # - Bash 4.0+
 #
-# USAGE: ./backup.sh s3://my-backup-bucket/path/to/project
+# USAGE: ./backup_all_volumes.sh s3://my-backup-bucket/path/to/project
 #
 
 # --- Configuration ---
 
 # Array of all named volumes to be backed up from your docker-compose file.
 # NOTE: For databases like PostgreSQL (postgres_data), a clean backup often requires 
-# running pg_dump inside the container first for true transactional consistency.
+# running 'pg_dump' inside the container first for true transactional consistency.
 # This script performs a raw filesystem snapshot backup.
 declare -a VOLUME_LIST=(
     "sonar_data_v"
@@ -28,6 +28,14 @@ declare -a VOLUME_LIST=(
     "nexus_data_v"
     "postgres_data"
 )
+
+# Determine the Docker Compose Project Prefix.
+# Based on user input, the Docker Compose project name is 'cicd'.
+# This prefix is used to construct the full volume names (e.g., cicd_jenkins-data).
+DOCKER_PROJECT_PREFIX="cicd"
+
+# To use the short volume names (e.g., if using 'external: true'), uncomment the line below:
+# DOCKER_PROJECT_PREFIX=""
 
 # Temporary local directory to stage the compressed backup files
 TEMP_BACKUP_DIR="/tmp/docker_volume_backups"
@@ -66,14 +74,22 @@ show_usage() {
 
 # Core logic to back up a single volume
 backup_single_volume() {
-    local DOCKER_VOLUME_NAME="$1"
+    local SHORT_VOLUME_NAME="$1"
     local S3_TARGET_PATH="$2"
+
+    # Construct the full volume name based on the prefix.
+    local DOCKER_VOLUME_NAME
+    if [ -n "$DOCKER_PROJECT_PREFIX" ]; then
+        DOCKER_VOLUME_NAME="${DOCKER_PROJECT_PREFIX}_${SHORT_VOLUME_NAME}"
+    else
+        DOCKER_VOLUME_NAME="${SHORT_VOLUME_NAME}"
+    fi
     
     echo "=================================================="
-    echo "STARTING BACKUP for Volume: $DOCKER_VOLUME_NAME"
+    echo "STARTING BACKUP for Volume: $DOCKER_VOLUME_NAME (Short name: $SHORT_VOLUME_NAME)"
     
     local TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-    local BACKUP_FILENAME="${DOCKER_VOLUME_NAME}_${TIMESTAMP}.tar.gz"
+    local BACKUP_FILENAME="${SHORT_VOLUME_NAME}_${TIMESTAMP}.tar.gz"
     local LOCAL_BACKUP_FILE="${TEMP_BACKUP_DIR}/${BACKUP_FILENAME}"
 
     # 1. Create the compressed tarball using a temporary container
@@ -82,11 +98,12 @@ backup_single_volume() {
     # Check if volume exists before attempting backup
     if ! docker volume inspect "$DOCKER_VOLUME_NAME" &> /dev/null; then
         echo "  !! WARNING: Docker volume '$DOCKER_VOLUME_NAME' not found. Skipping."
+        echo "     (Verify the volume exists and DOCKER_PROJECT_PREFIX is correct, currently set to: '$DOCKER_PROJECT_PREFIX')"
         return 0 # Continue to next volume
     fi
 
     # Run tar inside a minimal container (alpine/busybox)
-    sudo docker run --rm \
+    docker run --rm \
         -v "$DOCKER_VOLUME_NAME":"$CONTAINER_VOLUME_PATH":ro \
         -v "$TEMP_BACKUP_DIR":/backup \
         busybox:latest \
@@ -107,7 +124,12 @@ backup_single_volume() {
     echo "  -> Tarball size: $(du -h "$LOCAL_BACKUP_FILE" | awk '{print $1}')"
 
     # 2. Upload to S3
-    echo "  -> Uploading $BACKUP_FILENAME to S3 at $S3_TARGET_PATH..."
+    echo "  -> Uploading $BACKUP_FILENAME to S3 at $S3_TARGET_PATH/"
+    echo "credential:"
+    whoami
+    pwd
+    cat ~/.aws/credentials
+    echo "credential: "
     aws s3 cp "$LOCAL_BACKUP_FILE" "$S3_TARGET_PATH/"
     
     if [ $? -ne 0 ]; then
