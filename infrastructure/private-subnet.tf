@@ -1,3 +1,6 @@
+
+
+
 resource "aws_subnet" "cicd-subnet" {
   vpc_id            = aws_vpc.vpc_cicd.id
   cidr_block        = "10.0.3.0/24"
@@ -10,13 +13,35 @@ resource "aws_subnet" "cicd-subnet" {
 
 resource "aws_security_group" "cicd-sg" {
   name        = "CI/CD-SG"
-  description = "Allow inbound traffic from public ALB"
+  description = ".."
   vpc_id      = aws_vpc.vpc_cicd.id
 
   ingress {
-    description = "allows ssh "
-    from_port   = 22
-    to_port     = 22
+    description     = "allows ssh "
+    from_port       = 22
+    to_port         = 22
+    protocol        = "tcp"
+    security_groups = [aws_security_group.baston-host-security-group.id]
+  }
+
+  ingress {
+    description = "Allow all internal traffic within the EC2 instance"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    self        = true
+  }
+
+  egress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 443
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -38,7 +63,7 @@ resource "aws_route_table" "private-route-table" {
 
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat-gateway-subnet.id
+    nat_gateway_id = aws_nat_gateway.nat_gateway.id
   }
 
   tags = {
@@ -46,14 +71,20 @@ resource "aws_route_table" "private-route-table" {
   }
 }
 
-resource "aws_route_table_association" "private-web-subnet-1-route-table-association" {
-  subnet_id      = [for subnet in aws_subnet.private-web-subnet : subnet.id]
-  route_table_id = aws_route_table.public-route-table.id
+resource "aws_route_table_association" "cicd-host--route-table-association" {
+  subnet_id      = aws_subnet.cicd-subnet.id
+  route_table_id = aws_route_table.private-route-table.id
 }
 
+resource "aws_instance" "cicd-host" {
+  ami                         = "ami-0f39ffd6e446bf727"
+  associate_public_ip_address = true
+  instance_type               = "t2.large"
+  key_name                    = "cicdkey"
+  security_groups             = [aws_security_group.cicd-sg.id]
+  subnet_id                   = aws_subnet.bastion-host-subnet.id
 
-
-resource "aws_route_table_association" "private-app-subnet-1-route-table-association" {
-  subnet_id      = [for subnet in aws_subnet.private-app-subnet : subnet.id]
-  route_table_id = aws_route_table.public-route-table.id
+  tags = {
+    Name = "cicd host"
+  }
 }
