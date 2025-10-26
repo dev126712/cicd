@@ -4,4 +4,4 @@
 
 ## The services defined in the docker-compose.yml file are designed to be isolated yet connected, allowing for a fully automated software development pipeline.
 
-![alt text](https://github.com/dev126712/cicd/blob/2f6feee40bd20e41bcb2a391aa65dde340a7320f/cicd.png)
+![alt text](https://github.com/dev126712/cicd/blob/2d79805398c75877537e3484ff48f43334716e04/cicd.png)
