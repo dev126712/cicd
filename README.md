@@ -1,7 +1,18 @@
+
 # CI/CD
-## This repo represent explains the core components of the Continuous Integration/Continuous Delivery (CI/CD) environment, which is orchestrated using Docker Compose. This setup utilizes 4 key services: 
-### Jenkins (Automation), SonarQube (Code Quality), Nexus (Artifact Repository), and a PostgreSQL Database (db).
+## Representation of a CIDC infrastructure & setup for smaller Aplication:
 
-## The services defined in the docker-compose.yml file are designed to be isolated yet connected, allowing for a fully automated software development pipeline.
 
-![alt text](https://github.com/dev126712/cicd/blob/2f6feee40bd20e41bcb2a391aa65dde340a7320f/cicd.png)
+
+
+|  Infrastructure:  | AWS |
+| ------------- | ------------- |
+| Costum VPC  |  |
+| 2 Public Subnets | Bastion Host/NAT Gateway |
+| 1 Private Subnet | Jenkins Server, Sonarqube, Nexus Repository, Postgesql |
+| S3 Bucket | For storing container Volumes |
+| Gateway Endpoint |   |
+
+
+
+![alt text](https://github.com/dev126712/cicd/blob/2d79805398c75877537e3484ff48f43334716e04/cicd.png)
