@@ -3,7 +3,7 @@
 ### Infrastructure:
 #### - Costum VPC
 #### - 2 Public Subnets:
-#####     - Bastion Host
+  ##### - Bastion Host
 #####     - NAT Gateway
 #### - 1 Private Subnet:
 #####     - Jenkins Server, Sonarqube, Nexus Repository, Postgesql
