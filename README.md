@@ -36,4 +36,16 @@
 
 
 
+## Backup and Disaster Recovery Workflow
+#### This critical workflow ensures data integrity and operational continuity using AWS S3.
+- S3 Bucket Role: The S3 bucket is not for live volume data. It is the highly durable, long-term storage target for archival backups of the CI/CD volumes.
+- Backup Script (backup.sh): A scheduled process (e.g., a cron job on the EC2 host) runs a script that:
+    1. Stops the containers or pauses the database.
+    2. Creates compressed archives of the persistent Docker Volume data (Jenkins, Nexus, SonarQube DB, PostgreSQL DB).
+    3. Uploads these archives to the S3 Bucket using the Gateway Endpoint.
+- Restore Script (restore.sh): In a disaster scenario, this script is used to pull the latest backup archive from S3, decompress it, and load the data back into the volumes, allowing the CI/CD services to be restored to their last known good state.
+- Gateway Endpoint: Ensures that the large data transfer for backups stays within the Amazon network, reducing network overhead and increasing transfer security.
+
+
+
 ![alt text](https://github.com/dev126712/cicd/blob/2d79805398c75877537e3484ff48f43334716e04/cicd.png)
