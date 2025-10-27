@@ -4,14 +4,16 @@
 ### The entire AWS infrastructure is deployed using Terraform (IaC) tool. It define all resources (VPC, subnets, EC2 instance, endpoints) in configuration files, we ensure the infrastructure is version-controlled, auditable, and reproducible.
 ### Key Feature: The entire environment can be deployed with a single command ```terraform apply --auto-approve``` or destroyed using ```terraform destroy --auto-approve```  guaranteeing consistency and significantly reducing manual configuration errors. Enables rapid environment provisioning (e.g., creating a separate staging environment) and easy rollback capabilities.
 
-|  Infrastructure:  | AWS |
-| ------------- | ------------- |
-| Costum VPC  | Isolate The Network From The Outside World |
-| 2 Public Subnets | Bastion Host && NAT Gateway |
-| 1 Private Subnet | Jenkins Server, Sonarqube, Nexus Repository, Postgesql |
-| S3 Bucket | For Storing Container Volumes Data For Backup & Disaster Recovery |
-| Gateway Endpoint | For Accessing s3 Bucket Internally |
-| NAT Endpoint | To Allows Resources In The Private Subnet To Connect To The Internet Securly |
+
+## Infrastructure: AWS Network and Security
+### The network architecture is specifically designed to isolate and protect the CI/CD resources.
+
+|  Infrastructure:  |Functionality | Functionality |
+| ------------- | ------------- | ------------- |
+| Costum VPC  | Isolate The Network From The Outside World | Creates a secure, private cloud boundary. |
+| Bastion Host | A single, hardened server in the public subnet. | Serves as a secure jump box for authorized personnel to access the private EC2 instance for maintenance or troubleshooting (SSH). |
+| Private Subnet | Hosts all critical, stateful CI/CD services (Jenkins, SonarQube, Nexus, PostgreSQL). | Prevents unauthorized inbound connections from the public internet to core services. |
+| NAT Gateway | Allows resources in the private subnet to connect to the Internet (e.g., pulling Docker images, fetching plugins, updating rules). | Allows outbound-only connectivity, maintaining private network integrity by preventing external parties from initiating connections. |
 
 |  CI/CD Technology Stack:  | Services |
 | ------------- | ------------- |
