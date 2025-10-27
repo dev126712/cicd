@@ -13,7 +13,6 @@
 
 
 
-| ------------- | ------------- |
 |  Infrastructure:  |  |
 | Costum VPC  | Second Header |
 | ------------- | ------------- |
