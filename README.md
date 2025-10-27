@@ -2,9 +2,6 @@
 # CI/CD
 ## Representation of a CIDC infrastructure & setup for smaller Aplication:
 
-
-
-
 |  Infrastructure:  | AWS |
 | ------------- | ------------- |
 | Costum VPC  | Isolate The Network From The Outside World |
@@ -14,18 +11,20 @@
 | Gateway Endpoint | For Accessing s3 Bucket Internally |
 | NAT Endpoint | To Allows Resources In The Private Subnet To Connect To The Internet Securly |
 
-
-
-
-
-
-
 |  CI/CD Technology Stack:  | Services |
 | ------------- | ------------- |
 | Jenkins  | Central Automation Engine Of The CI/CD Pipeline. |
 | SonarQube | Static Code Analysis Platform |
 | Nexus Repository Manager | Central Repository |
 | PostgreSQL | Relational Database To Persist |
+
+
+
+|  Deployment:  | Docker Compose |
+| ------------- | ------------- |
+| Unified Service Definition  |  |
+| Service Orchestration and Networking |  |
+|  State Management and Persistence |  |
 
 
 
