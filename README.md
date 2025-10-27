@@ -10,9 +10,24 @@
 #### - Gateway Endpoint
 ####  - S3 Bucket for storing and backup of Volumes 
 
+
+
+
+| ------------- | ------------- |
+|  Infrastructure:  |  |
 | Costum VPC  | Second Header |
 | ------------- | ------------- |
-|  2 Public Subnets  | Content Cell  |
+|  2 Public Subnets  |   |
+| ------------- | ------------- |
+|  1 Private Subnet  |   |
+| ------------- | ------------- |
+|  Gateway Endpoint  |   |
+| ------------- | ------------- |
+|  S3 Bucket  |   |
+| ------------- | ------------- |
+|  2 Public Subnets  |   |
+| ------------- | ------------- |
+|  2 Public Subnets  |   |
 
 
 ![alt text](https://github.com/dev126712/cicd/blob/2d79805398c75877537e3484ff48f43334716e04/cicd.png)
