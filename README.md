@@ -22,9 +22,9 @@
 
 |  Deployment:  | Docker Compose |
 | ------------- | ------------- |
-| Unified Service Definition  | ```bash docker-compose.yml ``` |
-| Service Orchestration and Networking |  |
-|  State Management and Persistence |  |
+| Unified Service Definition  | One Single ```Docker-compose.yml ``` File Defines The Entire Application Stack |
+| Service Orchestration and Networking | Docker Compose Manages The Lifecycle and Internal Communication Between The Services |
+|  State Management and Persistence | Compose Is Used To Define And Map Persistent Docker Volumes, |
 
 
 
