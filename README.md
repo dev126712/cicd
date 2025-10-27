@@ -15,8 +15,8 @@
 
 
 |  Infrastructure:  |
-| Costum VPC  | Second Header |
 | ------------- | ------------- |
+| Costum VPC  | Second Header |
 |  2 Public Subnets  |   |
 |  1 Private Subnet  |   |
 |  Gateway Endpoint  |   |
