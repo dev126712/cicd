@@ -21,7 +21,7 @@
 
 
 
-|  Deployment:  | Docker Compose |
+| CI/CD Deployment:  | Docker Compose |
 | ------------- | ------------- |
 | Unified Service Definition  | One Single ```docker-compose.yml ``` File Defines The Entire Application Stack |
 | Service Orchestration and Networking | Docker Compose Manages The Lifecycle and Internal Communication Between The Services |
