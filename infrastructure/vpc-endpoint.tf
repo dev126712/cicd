@@ -1,6 +1,6 @@
 resource "aws_vpc_endpoint" "s3_gateway" {
   vpc_id            = aws_vpc.vpc_cicd.id
-  service_name      = "com.amazonaws.ca-central-1.s3"
+  service_name      = "com.amazonaws.${var.regio}.s3"
   vpc_endpoint_type = "Gateway"
 
   route_table_ids = [

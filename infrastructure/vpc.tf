@@ -10,13 +10,13 @@ terraform {
 
 
 provider "aws" {
-  region = "ca-central-1"
+  region = var.region
 
 }
 
 
 resource "aws_vpc" "vpc_cicd" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block           = var.vpc-cidr_block
   instance_tenancy     = "default"
   enable_dns_hostnames = true
 
