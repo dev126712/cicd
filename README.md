@@ -25,13 +25,14 @@
 | Nexus Repository Manager | Central Repository for binaries and dependencies. | Acts as a secure, private cache (proxy) for dependencies and hosts finalized deployable Artifacts. |
 | PostgreSQL | Relational Database To Persist Service State. | Provides transactional data integrity and durable storage for the configuration and metadata of all CI/CD tools. |
 
+## CI/CD Deployment: Docker Compose
+#### Docker Compose defines and manages the multi-container CI/CD application suite.
 
-
-| CI/CD Deployment:  | Docker Compose |
-| ------------- | ------------- |
-| Unified Service Definition  | One Single ```docker-compose.yml ``` File Defines The Entire Application Stack |
-| Service Orchestration and Networking | Docker Compose Manages The Lifecycle and Internal Communication Between The Services |
-|  State Management and Persistence | Compose Is Used To Define And Map Persistent Docker Volumes |
+| Aspect  | Description | Value |
+| ------------- | ------------- | ------------- |
+| Unified Service Definition  | One Single ```docker-compose.yml ``` File Defines The Entire Application Stack | Reproducibility: Ensures consistent deployment across environments. |
+| Service Orchestration and Networking |Manages the lifecycle and creates an internal, isolated network for inter-service communication. | Isolation: Allows services (e.g., Jenkins) to connect to others (e.g., PostgreSQL) using service names, without exposing unnecessary ports externally. |
+|  State Management and Persistence | Used to define and map persistent Docker Volumes. | Durability: Guarantees that essential application data (e.g., Jenkins job history, Nexus artifacts) survives container recreation and restarts. |
 
 
 
