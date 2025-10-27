@@ -12,7 +12,7 @@
 | 1 Private Subnet | Jenkins Server, Sonarqube, Nexus Repository, Postgesql |
 | S3 Bucket | For Storing Container Volumes Data |
 | Gateway Endpoint | For Accessing s3 Bucket Internally |
-| NAT Endpoint | To Allows Resources In The Private Subnet To Connect To The Internet |
+| NAT Endpoint | To Allows Resources In The Private Subnet To Connect To The Internet Securly |
 
 
 
