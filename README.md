@@ -4,6 +4,7 @@
 
 |  Infrastructure:  | AWS |
 | ------------- | ------------- |
+| Deply Infra | ```Infrastructure ``` Folder contains the entire infra & can be deploy with a single command ```terraform apply --auto-approve``` |
 | Costum VPC  | Isolate The Network From The Outside World |
 | 2 Public Subnets | Bastion Host && NAT Gateway |
 | 1 Private Subnet | Jenkins Server, Sonarqube, Nexus Repository, Postgesql |
@@ -22,9 +23,9 @@
 
 |  Deployment:  | Docker Compose |
 | ------------- | ------------- |
-| Unified Service Definition  | One Single ```Docker-compose.yml ``` File Defines The Entire Application Stack |
+| Unified Service Definition  | One Single ```docker-compose.yml ``` File Defines The Entire Application Stack |
 | Service Orchestration and Networking | Docker Compose Manages The Lifecycle and Internal Communication Between The Services |
-|  State Management and Persistence | Compose Is Used To Define And Map Persistent Docker Volumes, |
+|  State Management and Persistence | Compose Is Used To Define And Map Persistent Docker Volumes |
 
 
 
