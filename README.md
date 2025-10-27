@@ -1,12 +1,12 @@
 
 # CI/CD Representation of a CIDC infrastructure & setup for smaller Aplication:
 ## Infrastructure Deployment: Terraform (Infrastructure as Code)
-### The entire AWS infrastructure is deployed using Terraform (IaC) tool. It define all resources (VPC, subnets, EC2 instance, endpoints) in configuration files, we ensure the infrastructure is version-controlled, auditable, and reproducible.
+#### The entire AWS infrastructure is deployed using Terraform (IaC) tool. It define all resources (VPC, subnets, EC2 instance, endpoints) in configuration files, we ensure the infrastructure is version-controlled, auditable, and reproducible.
 ### Key Feature: The entire environment can be deployed with a single command ```terraform apply --auto-approve``` or destroyed using ```terraform destroy --auto-approve```  guaranteeing consistency and significantly reducing manual configuration errors. Enables rapid environment provisioning (e.g., creating a separate staging environment) and easy rollback capabilities.
 
 
 ## Infrastructure: AWS Network and Security
-### The network architecture is specifically designed to isolate and protect the CI/CD resources.
+#### The network architecture is specifically designed to isolate and protect the CI/CD resources.
 
 |  Infrastructure:  |Functionality | Functionality |
 | ------------- | ------------- | ------------- |
