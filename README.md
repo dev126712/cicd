@@ -16,4 +16,17 @@
 
 
 
+
+
+
+
+|  CI/CD Technology Stack:  | Services |
+| ------------- | ------------- |
+| Jenkins  | Central Automation Engine Of The CI/CD Pipeline. |
+| SonarQube | Static Code Analysis Platform |
+| Nexus Repository Manager | Central Repository |
+| PostgreSQL | Relational Database To Persist |
+
+
+
 ![alt text](https://github.com/dev126712/cicd/blob/2d79805398c75877537e3484ff48f43334716e04/cicd.png)
