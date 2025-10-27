@@ -10,7 +10,7 @@
 #### - Gateway Endpoint
 ####  - S3 Bucket for storing and backup of Volumes 
 | Infrastructure |
-| ------------- |
+| ------------- | ------------- |
 | Costum VPC  | Second Header |
 | ------------- | ------------- |
 |  2 Public Subnets  | Content Cell  |
