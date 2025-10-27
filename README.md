@@ -22,7 +22,7 @@
 
 |  Deployment:  | Docker Compose |
 | ------------- | ------------- |
-| Unified Service Definition  |  |
+| Unified Service Definition  | ```bash docker-compose.yml ``` |
 | Service Orchestration and Networking |  |
 |  State Management and Persistence |  |
 
