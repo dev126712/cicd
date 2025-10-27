@@ -2,14 +2,14 @@
 # CI/CD
 ## Representation of a CIDC infrastructure & setup for smallwe aplication:
 ### Infrastructure:
-#### - Costum VPC
-#### - 2 Public Subnets:
+#### -    Costum VPC
+#### -    2 Public Subnets:
   ##### - Bastion Host
-#####     - NAT Gateway
+#####     -    NAT Gateway
 #### - 1 Private Subnet:
-#####     - Jenkins Server, Sonarqube, Nexus Repository, Postgesql
+#####     -    Jenkins Server, Sonarqube, Nexus Repository, Postgesql
 #### - Gateway Endpoint
-####  - S3 Bucket for storing and backup of Volumes 
+####  -    S3 Bucket for storing and backup of Volumes 
 
 
 
