@@ -1,6 +1,6 @@
 
 # CI/CD
-## Representation of a CIDC infrastructure & setup for smallwe aplication:
+## Representation of a CIDC infrastructure & setup for smaller Aplication:
 
 
 
