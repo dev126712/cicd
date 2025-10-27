@@ -4,7 +4,7 @@
 
 |  Infrastructure:  | AWS |
 | ------------- | ------------- |
-| Deply Infra | ```Infrastructure ``` Folder contains the entire infra & can be deploy with a single command ```terraform apply --auto-approve``` |
+| Deploy Infrastructure | ```Infrastructure ``` Folder contains the entire infra & can be deploy with a single command ```terraform apply --auto-approve``` |
 | Costum VPC  | Isolate The Network From The Outside World |
 | 2 Public Subnets | Bastion Host && NAT Gateway |
 | 1 Private Subnet | Jenkins Server, Sonarqube, Nexus Repository, Postgesql |
