@@ -8,10 +8,10 @@
 |  Infrastructure:  | AWS |
 | ------------- | ------------- |
 | Costum VPC  |  |
-|  2 Public Subnets  | Bastion Host/NAT Gateway  |
-|  1 Private Subnet  | Jenkins Server, Sonarqube, Nexus Repository, Postgesql  |
-|  S3 Bucket  |   |
-|  Gateway Endpoint  | For storing container Volumes  |
+| 2 Public Subnets | Bastion Host/NAT Gateway |
+| 1 Private Subnet | Jenkins Server, Sonarqube, Nexus Repository, Postgesql |
+| S3 Bucket | For storing container Volumes |
+| Gateway Endpoint |   |
 
 
 
