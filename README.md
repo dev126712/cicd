@@ -14,7 +14,7 @@
 
 
 
-|  Infrastructure:  |
+|  Infrastructure:  |  |
 | ------------- | ------------- |
 | Costum VPC  | Second Header |
 |  2 Public Subnets  |   |
