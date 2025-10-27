@@ -11,8 +11,7 @@
 | 2 Public Subnets | Bastion Host/NAT Gateway |
 | 1 Private Subnet | Jenkins Server, Sonarqube, Nexus Repository, Postgesql |
 | S3 Bucket | For storing container Volumes |
-| Gateway Endpoint |   |
-| NAT Gateway |   |
+| Gateway Endpoint | For accessing s3 bucket internally |
 
 
 
