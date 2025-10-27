@@ -10,9 +10,9 @@
 | Costum VPC  |  |
 | 2 Public Subnets | Bastion Host/NAT Gateway |
 | 1 Private Subnet | Jenkins Server, Sonarqube, Nexus Repository, Postgesql |
-| S3 Bucket | For storing container Volumes |
-| Gateway Endpoint | For accessing s3 bucket internally |
-| NAT Endpoint | To allows resources in a private subnet to connect to the internet |
+| S3 Bucket | For Storing Container Volumes Data |
+| Gateway Endpoint | For Accessing s3 Bucket Internally |
+| NAT Endpoint | To Allows Resources In The Private Subnet To Connect To The Internet |
 
 
 
