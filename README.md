@@ -11,9 +11,9 @@
 |  Component  |Functionality | Functionality |
 | ------------- | ------------- | ------------- |
 | Costum VPC  | Isolate The Network From The Outside World | Creates a secure, private cloud boundary. |
-| Bastion Host | A single, hardened server in the public subnet. | Serves as a secure jump box for authorized personnel to access the private EC2 instance for maintenance or troubleshooting (SSH). |
-| Private Subnet | Hosts all critical, stateful CI/CD services (Jenkins, SonarQube, Nexus, PostgreSQL). | Prevents unauthorized inbound connections from the public internet to core services. |
-| NAT Gateway | Allows resources in the private subnet to connect to the Internet (e.g., pulling Docker images, fetching plugins, updating rules). | Allows outbound-only connectivity, maintaining private network integrity by preventing external parties from initiating connections. |
+| Bastion Host | A single, Hardened Server in the Public Subnet. | Serves as a Secure Jump Box for Authorized Personnel to Access the Private EC2 instance for Maintenance or Troubleshooting (SSH). |
+| Private Subnet | Hosts All Critical, Stateful CI/CD Services (Jenkins, SonarQube, Nexus, PostgreSQL). | Prevents Unauthorized Inbound Connections from the Public Internet to Core Services. |
+| NAT Gateway | Allows Resources in the Private Subnet to Connect to the Internet (e.g., pulling Docker images, fetching plugins, updating rules). | Allows outbound-only connectivity, maintaining private network integrity by preventing external parties from initiating connections. |
 | Gateway Endpoint | Create A Secure Private Connection between VPC and AWS Services | Make A Private Connection Between MY Custom VPC and My S3 Bucket Without the Need To Go To The Public Internet|
 
 ## CI/CD Technology Stack
