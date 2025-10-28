@@ -14,6 +14,7 @@
 | Bastion Host | A single, hardened server in the public subnet. | Serves as a secure jump box for authorized personnel to access the private EC2 instance for maintenance or troubleshooting (SSH). |
 | Private Subnet | Hosts all critical, stateful CI/CD services (Jenkins, SonarQube, Nexus, PostgreSQL). | Prevents unauthorized inbound connections from the public internet to core services. |
 | NAT Gateway | Allows resources in the private subnet to connect to the Internet (e.g., pulling Docker images, fetching plugins, updating rules). | Allows outbound-only connectivity, maintaining private network integrity by preventing external parties from initiating connections. |
+| Gateway Endpoint | Create A Secure Private Connection between My VPC and AWS Services(S3) |
 
 ## CI/CD Technology Stack
 #### This stack provides a complete, self-hosted software delivery pipeline.
